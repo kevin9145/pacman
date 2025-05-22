@@ -3,8 +3,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const cells = Array.from(grid.querySelectorAll('div'));
     const width = 10;
     let pacmanIndex = 11;
+    let score = 0;
+    const scoreDisplay = document.getElementById('score');
 
+    // Coloca a Pacman en la posición inicial
+    cells[pacmanIndex].classList.add('pacman');
 
+    function movePacman(e) {
+        cells[pacmanIndex].classList.remove('pacman');
+
+        switch(e.key) {
+            case 'ArrowUp':
+                if (pacmanIndex - width >= 0 && !cells[pacmanIndex - width].classList.contains('wall')) {
+                    pacmanIndex -= width;
+                }
+                break;
+            case 'ArrowDown':
+                if (pacmanIndex + width < cells.length && !cells[pacmanIndex + width].classList.contains('wall')) {
+                    pacmanIndex += width;
+                }
+                break;
+            case 'ArrowLeft':
+                if (pacmanIndex % width !== 0 && !cells[pacmanIndex - 1].classList.contains('wall')) {
+                    pacmanIndex -= 1;
+                }
+                break;
+            case 'ArrowRight':
+                if (pacmanIndex % width !== width - 1 && !cells[pacmanIndex + 1].classList.contains('wall')) {
+                    pacmanIndex += 1;
+                }
+                break;
+        }
+
+        // Comer puntos
+        if (cells[pacmanIndex].classList.contains('dot')) {
+            cells[pacmanIndex].classList.remove('dot');
+            score+=10;
+            if (scoreDisplay) {
+                scoreDisplay.textContent = score;
+            }
+        }
+
+        cells[pacmanIndex].classList.add('pacman');
+    }
+
+    document.addEventListener('keydown', movePacman);
+
+    // Código de los fantasmas
     class Ghost {
         constructor(name, starIndex, className, speed = 500) {
             this.name = name;
@@ -34,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.erase();
                     this.currentIndex = nextIndex;
                     this.draw();
-
                 } else {
                     moveGhost();
                 }
@@ -42,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.timerId = setInterval(moveGhost, this.speed);
         }
     }
+
     const blinky = new Ghost('blinky', 35, 'red', 500);
     const pinky = new Ghost('pinky', 36, 'pink', 500);
     const ghosts = [blinky, pinky];
@@ -49,12 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ghosts.forEach(ghost => {
         ghost.draw();
         ghost.move();
-
     });
-
-
-
-})
+});
 
 
 
