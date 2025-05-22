@@ -44,23 +44,29 @@ border-radius: 50%;
 
 
 .pacman{
-    background-color: yellow;
+    background-color: black;
     border-radius: 50%;
+    background-image: url(pacman.png);
+    background-size: cover;
+    background-position: center;
+  
 }
 
 
-.ghost{
-    border-radius: 50%;
-
-}
 
 .red{
-    background-color: red;
+
+    background-image: url(red.png);
+    background-size: cover;
+    background-position: center;
+    
 }
 
 .pink{
-    background-color: pink;
+    
+    background-image: url(pink.png);
+    background-size: cover;
+    background-position: center;
 }
-
 
 
