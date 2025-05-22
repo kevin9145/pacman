@@ -16,7 +16,11 @@ gap: 2px;
 justify-content: center;
 margin: 0 auto;
 
+
 }
+
+
+
 .wall{
 
     background-color: #0033cc;
@@ -67,6 +71,8 @@ border-radius: 50%;
     background-image: url(pink.png);
     background-size: cover;
     background-position: center;
+    
 }
+
 
 
